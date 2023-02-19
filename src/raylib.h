@@ -920,6 +920,15 @@ typedef bool (*SaveFileTextCallback)(const char *fileName, char *text); // FileI
 extern "C" {            // Prevents name mangling of functions
 #endif
 
+#if defined(PLATFORM_DESKTOP) || defined(PLATFORM_WEB)
+#define GLFW_INCLUDE_NONE       // Disable the standard OpenGL header inclusion on GLFW3
+                                // NOTE: Already provided by rlgl implementation (on glad.h)
+#include "GLFW/glfw3.h"         // GLFW3 library: Windows, OpenGL context and Input management
+                                // NOTE: GLFW3 already includes gl.h (OpenGL) headers
+
+RLAPI GLFWwindow *GetGLFWWindow();
+#endif
+
 // Window-related functions
 RLAPI void InitWindow(int width, int height, const char *title);  // Initialize window and OpenGL context
 RLAPI bool WindowShouldClose(void);                               // Check if KEY_ESCAPE pressed or Close icon pressed

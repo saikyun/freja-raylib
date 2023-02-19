@@ -509,6 +509,12 @@ RLAPI const char *raylib_version = RAYLIB_VERSION;  // raylib version exported s
 
 static CoreData CORE = { 0 };               // Global CORE state context
 
+#if defined(PLATFORM_DESKTOP) || defined(PLATFORM_WEB)
+GLFWwindow *GetGLFWWindow() {
+    return CORE.Window.handle;
+};
+#endif
+
 #if defined(SUPPORT_SCREEN_CAPTURE)
 static int screenshotCounter = 0;           // Screenshots counter
 #endif
